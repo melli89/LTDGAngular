@@ -1,0 +1,10 @@
+<link href='https://fonts.googleapis.com/css?family=MedievalSharp' rel='stylesheet'>
+<h2>EJÉRCITOS</h2>
+<div id="armies">
+    <mat-card *ngFor="let army of armies_info" class="example-card mat-elevation-z0">
+        <div class="armies" routerLink="/listmaker/{{army.id}}">
+            <img class="homeImg" mat-card-image src="{{army.imagen}}" alt="Ejército">
+            <mat-card-title class="medievalsharp-regular">{{army.raza}}</mat-card-title>
+        </div>
+    </mat-card>
+</div>

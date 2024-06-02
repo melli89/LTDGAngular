@@ -1,0 +1,72 @@
+
+<div cdkDropListGroup>
+    <div class="example-container">
+      <h2>UNIDADES</h2>
+      <div class="title" (click)="display(0)">Héroes</div>
+      <div
+        cdkDropList
+        [cdkDropListData]="cgItems"
+        class="example-list unit"
+        cdkDropListSortingDisabled
+        (cdkDropListDropped)="delete($event)">
+        <div *ngFor="let item of cgItems" cdkDrag>
+          {{item.nombre}}
+        </div>
+      </div>
+      <div class="title" (click)="display(1)">Básicas</div>
+      <div
+        cdkDropList
+        [cdkDropListData]="basicItems"
+        class="example-list unit"
+        cdkDropListSortingDisabled
+        (cdkDropListDropped)="delete($event)">
+        <div *ngFor="let item of basicItems" cdkDrag>
+          {{item.nombre}}
+        </div>
+      </div>
+      <div class="title" (click)="display(2)">Especiales</div>
+      <div
+        cdkDropList
+        [cdkDropListData]="specialItems"
+        class="example-list unit"
+        cdkDropListSortingDisabled
+        (cdkDropListDropped)="delete($event)">
+        <div *ngFor="let item of specialItems" cdkDrag>
+          {{item.nombre}}
+        </div>
+      </div>
+      <div class="title" (click)="display(3)">Singulares</div>
+      <div
+        cdkDropList
+        [cdkDropListData]="singularItems"
+        class="example-list unit"
+        cdkDropListSortingDisabled
+        (cdkDropListDropped)="delete($event)">
+        <div *ngFor="let item of singularItems" cdkDrag>
+          {{item.nombre}}
+        </div>
+      </div>
+    </div>
+  
+    <div class="example-container">
+      <h2>LISTA</h2>
+      <div
+        cdkDropList
+        [cdkDropListData]="basket"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let item of basket" cdkDrag >
+          {{item.punto_mini}}pts. - {{item.nombre}}
+          <button mat-icon-button color="primary">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="editUnit(item.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

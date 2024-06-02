@@ -1,0 +1,17 @@
+<div class="b-example-divider"></div>
+  <div class="container-fluid" style="background-color: #0A728B;">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <div class="col-md-3 mb-2 mb-md-0">
+      <a routerLink="/home"><img src="..\assets\img\logo_blanco.png" alt="Logo La Posada Del Guerrero" width="200px"/></a>
+      </div>
+
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a routerLink="/listmaker/1" class="nav-link px-2 link-secondary">Crear lista</a></li>
+        <li><a href="#" class="nav-link px-2">Reglas especiales</a></li>
+      </ul>
+
+      <div *ngIf="!loginPage" class="col-md-3 text-end">
+        <button type="button" class="btn btn-info btn-lg" routerLink="/login">Large button</button>
+      </div>
+    </header>
+  </div>

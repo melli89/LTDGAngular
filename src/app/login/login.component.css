@@ -1,0 +1,13 @@
+#formulario{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: center;
+    
+}
+
+.formulario{
+    display:flex;
+    flex-direction: column;
+    padding:3em 20em;
+}
