@@ -1,0 +1,23 @@
+<div id="titulo">
+    <h1>REGLAS ESPECIALES</h1>
+</div>
+<div class="container my-5">
+    <div class="alphabet">
+      <ul id="abecedario" class="list-inline">
+        <li  class="list-inline-item" *ngFor="let letter of alphabet">
+          <a class="letras" (click)="scrollToElement(letter)">{{ letter }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="glosario">
+      <div *ngFor="let letter of alphabet"  [id]="letter">
+        <h2 class="letrasAnclas">{{ letter }}</h2>
+        <div *ngIf="groupedTerms[letter]">
+          <div *ngFor="let item of groupedTerms[letter]">
+            <h3>{{ item.nombre }}</h3>
+            <p>{{ item.descripcion }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

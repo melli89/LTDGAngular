@@ -24,7 +24,7 @@
 }
 
 .header-home {
-  background-image: url('C:\Users\FRAN-LAPTOP\Downloads\TFG\img\cabeceraimg.png');
+  background-image: url('../assets/img/cabeceraimg.png');
   background-size: cover;
   padding-bottom: 20em;
 }
@@ -37,13 +37,13 @@
   outline: 0;
 }
 
-.container{
-  margin-bottom: 10%;
-}
-
 
 .nav-link{
   color:white;
+}
+
+.nav-link:hover{
+  color:#E5B80B;
 }
 
 #descripcionHome{
@@ -55,4 +55,8 @@
 
 .lema{
   color:white;
+}
+
+.cuerpo{
+  min-height: 80vh;
 }

@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit{
         this.armies_info = data;
       },complete:()=>{
 
-        console.log(this.armies_info);
+
         subscription.unsubscribe();
       },error:console.log
   })

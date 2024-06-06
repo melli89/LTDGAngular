@@ -6,7 +6,7 @@
       </div>
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a routerLink="/listmaker/1" class="nav-link px-2">Crear lista</a></li>
-        <li><a href="#" class="nav-link px-2">Reglas especiales</a></li>
+        <li><a routerLink="/rules" class="nav-link px-2">Reglas especiales</a></li>
       </ul>
       <div class="col-md-3 text-end">
         <button type="button" class="btn btn-info botonInicio" routerLink="/login">INICIAR SESIÓN</button>
@@ -23,5 +23,5 @@
   </div>
 </div>
 <app-navbar *ngIf="!isHomePage"></app-navbar>
-<router-outlet></router-outlet>
+<div class="cuerpo"><router-outlet></router-outlet></div>
 <app-footer></app-footer>

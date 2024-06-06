@@ -1,72 +1,98 @@
 
-<div cdkDropListGroup>
-    <div class="example-container">
+<div>
+  <h3 id="puntos"></h3>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="contenedor col-4">
       <h2>UNIDADES</h2>
       <div class="title" (click)="display(0)">Héroes</div>
-      <div
-        cdkDropList
-        [cdkDropListData]="cgItems"
-        class="example-list unit"
-        cdkDropListSortingDisabled
-        (cdkDropListDropped)="delete($event)">
-        <div *ngFor="let item of cgItems" cdkDrag>
+      <div class="unit">
+        <div *ngFor="let item of cgItems" class="item">
           {{item.nombre}}
+          <button mat-icon-button color="primary" (click)="add(item)">
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
       </div>
+      
       <div class="title" (click)="display(1)">Básicas</div>
-      <div
-        cdkDropList
-        [cdkDropListData]="basicItems"
-        class="example-list unit"
-        cdkDropListSortingDisabled
-        (cdkDropListDropped)="delete($event)">
-        <div *ngFor="let item of basicItems" cdkDrag>
-          {{item.nombre}}
+      <div class="unit">
+        <div *ngFor="let item of basicItems" class="item">
+            {{item.nombre}}
+            <button mat-icon-button color="primary" (click)="add(item)">
+              <mat-icon>add</mat-icon>
+            </button>
         </div>
       </div>
+      
       <div class="title" (click)="display(2)">Especiales</div>
-      <div
-        cdkDropList
-        [cdkDropListData]="specialItems"
-        class="example-list unit"
-        cdkDropListSortingDisabled
-        (cdkDropListDropped)="delete($event)">
-        <div *ngFor="let item of specialItems" cdkDrag>
+      <div class="unit">
+        <div *ngFor="let item of specialItems" class="item" (click)="add(item)">
           {{item.nombre}}
-        </div>
-      </div>
-      <div class="title" (click)="display(3)">Singulares</div>
-      <div
-        cdkDropList
-        [cdkDropListData]="singularItems"
-        class="example-list unit"
-        cdkDropListSortingDisabled
-        (cdkDropListDropped)="delete($event)">
-        <div *ngFor="let item of singularItems" cdkDrag>
-          {{item.nombre}}
-        </div>
-      </div>
-    </div>
-  
-    <div class="example-container">
-      <h2>LISTA</h2>
-      <div
-        cdkDropList
-        [cdkDropListData]="basket"
-        class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let item of basket" cdkDrag >
-          {{item.punto_mini}}pts. - {{item.nombre}}
           <button mat-icon-button color="primary">
             <mat-icon>add</mat-icon>
           </button>
-          <button mat-icon-button color="primary" (click)="editUnit(item.id)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" >
-            <mat-icon>delete</mat-icon>
+        </div>
+      </div>
+      
+      
+      <div class="title" (click)="display(3)">Singulares</div>
+      <div class="unit">
+        <div *ngFor="let item of singularItems" class="item" (click)="add(item)">
+          {{item.nombre}}
+          <button mat-icon-button color="primary">
+            <mat-icon>add</mat-icon>
           </button>
         </div>
       </div>
+
+      <button (click)="guardarLista()" id="btn-save">Guardar lista</button>
+
     </div>
+  
+    <div class="contenedor col-3">
+      <h2>LISTA - {{totalPoints}} puntos</h2>
+
+      <div *ngFor="let item of basket" class="item">
+        {{item.model.nombre}} - {{item.totalPoints}}pts.
+        <button mat-icon-button color="primary" (click)="add(item.model)">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="editUnit(item)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="delete(item.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    
+    <div  class="contenedor col-4" id="options" >
+      <h2>OPCIONES</h2>
+      <div *ngIf="unit">
+        <label for="unitSize"><h4>Tamaño unidad: </h4></label>
+        <input id="unitSize" type="number" min="{{unit.model.tamano_minimo}}" max="{{unit.model.tamano_maximo}}" value="{{unit.model.tamano_minimo}}" (change)="setSize($event)"/>
+
+        <div *ngIf="isChampion()">
+          <section class="example-section">
+            <h4>Grupo de mando:</h4>
+            <p><input type="checkbox" id="campeon" (change)="checkIfChecked($event)">Una miniatura de la unidad puede ser {{champion?.nombre}} por + {{champion?.puntos}} ptos.</p>
+          </section>
+        </div>
+        <div>
+          <h4>Armas</h4>
+          <input type="radio" id="{{handWeapon?.id}}" name="upgrades" value="{{handWeapon?.id}}" (change)="checkRadios()" checked/>
+          <label for="{{handWeapon?.id}}">{{handWeapon?.nombre}} - {{handWeapon?.puntos}} ptos.</label>
+          <div *ngFor="let upgrade of upgrades">
+            <input  *ngIf="upgrade.id != handWeapon?.id" id="{{upgrade.id}}" type="radio" name="upgrades" value="{{upgrade.id}}" (change)="checkRadios()"/>
+            <label *ngIf="upgrade.id != handWeapon?.id" for="{{upgrade.id}}">{{upgrade.nombre}} - {{upgrade.puntos}} ptos.</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
   </div>
+</div>

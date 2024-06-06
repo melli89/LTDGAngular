@@ -1,0 +1,64 @@
+#cuerpo{
+    margin:5% 10%;
+}
+
+
+.regla{
+    margin: 5% 0;
+}
+
+
+#titulo{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 5% 0;
+    align-items: center;
+}
+
+#buscador{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 4%;
+}
+
+h1{
+    font-family: 'medievalSharp';
+    font-size: 35px;
+    margin:0 !important;
+}
+
+
+.letras{
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'medievalSharp';
+    font-weight: bold;
+    font-size: 25px;
+    margin: 1.5%;
+}
+
+.letras:hover{
+    color:#8F7307;
+}
+
+#abecedario{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+p{
+    margin-left: 2%;
+}
+
+h3{
+    margin: 3% 0 1% 0;
+    font-weight: bold;
+}
+
+.letrasAnclas{
+    margin-top: 3%;
+    color: #BA0D4A;
+}

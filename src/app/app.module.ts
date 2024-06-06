@@ -31,6 +31,9 @@ import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ListcreatorComponent } from './listcreator/listcreator.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { RulesComponent } from './rules/rules.component';
 
 
 
@@ -42,7 +45,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     NavbarComponent,
     FooterComponent,
     LoginComponent,
-    ListcreatorComponent
+    ListcreatorComponent,
+    RulesComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +74,10 @@ import {MatTabsModule} from '@angular/material/tabs';
     DragDropModule,
     MatListModule,
     MatExpansionModule,
-    MatTabsModule
+    MatTabsModule,
+    MatRadioModule,
+    MatCheckboxModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

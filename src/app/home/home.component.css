@@ -37,3 +37,15 @@
 mat-card:hover .homeImg{
     opacity: 100%;
 }
+
+#titulo{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 5%;
+    
+}
+
+h1{
+    font-family: 'medievalSharp';
+}
