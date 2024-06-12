@@ -9,16 +9,18 @@
         <li><a routerLink="/rules" class="nav-link px-2">Reglas especiales</a></li>
       </ul>
       <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-info botonInicio" routerLink="/login">INICIAR SESIÓN</button>
+        <button *ngIf="isUserAdmin()" class="btn btn-info botonInicio"  routerLink="/admin">Administración de usuarios</button>
+        <button *ngIf="!isLogged()" type="button" class="btn btn-info botonInicio" routerLink="/login">INICIAR SESIÓN</button>
+        <button *ngIf="isLogged()" type="button" class="btn btn-info botonInicio" routerLink="/user">Mi cuenta</button>
       </div>
     </header>
   </div>
   <div id="descripcionHome">
     <h3 class="lema">Únete a</h3>
-    <h1 class="lema">La Taberna Del Guerrero</h1>
+    <h1 class="lema" id="nombreWeb">La Taberna Del Guerrero</h1>
     <h3 class="lema">y forja tus listas de ejército épicas de forma fácil y rápida para derrotar a tus enemigoss.</h3>
-    <div class="col-md-3 text-end">
-      <button type="button" class="btn btn-primary botonInicio" routerLink="/listmaker">CREAR LISTA</button>
+    <div class="text-start">
+      <button type="button" class="btn btn-primary botonInicio botonHome" routerLink="/listmaker">CREAR LISTA</button>
     </div>
   </div>
 </div>

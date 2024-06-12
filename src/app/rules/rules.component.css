@@ -12,8 +12,12 @@
     display:flex;
     flex-direction: row;
     justify-content: center;
-    margin: 5% 0;
+    padding: 7% 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     align-items: center;
+    background-image: url("../../assets/img/lupa.jpg");
 }
 
 #buscador{
@@ -27,6 +31,7 @@ h1{
     font-family: 'medievalSharp';
     font-size: 35px;
     margin:0 !important;
+    color:white;
 }
 
 
@@ -59,6 +64,8 @@ h3{
 }
 
 .letrasAnclas{
-    margin-top: 3%;
+    margin-top: 8%;
     color: #BA0D4A;
+    border-bottom: 2px solid black;
 }
+

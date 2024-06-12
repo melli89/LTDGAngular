@@ -33,8 +33,21 @@
 
 }
 
+.item:hover{
+  background-color: #F7D85E;
+}
+
+#edicion:focus{
+  background-color: #F7D85E;
+}
+
 .item:last-child {
   border: none;
+}
+
+#opciones{
+  background-color: #F7D85E;
+  padding: 2em;
 }
 
 .unit {
@@ -46,11 +59,44 @@
 }
 
 .row {
-  gap: 2em;
+  gap: 3em;
+  margin:10%;
 }
 
 #btn-save {
-  width: 100%;
+  width: 60%;
   margin: 2em 0;
   padding: 1em;
+  background-color: #BA0D4A;
+  color:white;
 }
+
+#btn-save:hover{
+  background-color: #74082E;
+}
+
+#botonContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#containerTitle{
+  background-image: url("../../assets/img/creador.png");
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 7% 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  align-items: center;
+}
+
+h1{
+  font-family: 'medievalSharp';
+  font-size: 35px;
+  margin:0 !important;
+  color:white;
+}
+

@@ -1,17 +1,20 @@
-<div class="b-example-divider"></div>
+<div id="contenedor" class="b-example-divider">
   <div class="container-fluid" style="background-color: #0A728B;">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      <div class="col-md-3 mb-2 mb-md-0">
-      <a routerLink="/home"><img src="..\assets\img\logo_blanco.png" alt="Logo La Posada Del Guerrero" width="200px"/></a>
+    <header class="d-flex flex-wrap align-items-center justify-content-md-between">
+      <div class="col">
+      <a routerLink="/home"><img src="..\assets\img\logo_blanco.png" alt="Logo La Posada Del Guerrero" width="200px" id= "logo" /></a>
       </div>
 
-      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      <ul class="nav col justify-content-center">
         <li><a routerLink="/listmaker/1" class="nav-link px-2">Crear lista</a></li>
         <li><a routerLink="/rules" class="nav-link px-2">Reglas especiales</a></li>
       </ul>
 
-      <div *ngIf="!loginPage" class="col-md-3 text-end">
-        <button type="button" class="btn btn-info botonInicio" routerLink="/login">INICIAR SESIÓN</button>
+      <div *ngIf="!loginPage" class="col text-end">
+        <button *ngIf="isUserAdmin()" class="btn btn-info botonInicio"  routerLink="/admin">Administración</button>
+        <button *ngIf="!isLogged()" type="button" class="btn btn-info botonInicio" routerLink="/login">INICIAR SESIÓN</button>
+        <button *ngIf="isLogged()" type="button" class="btn btn-info botonInicio" routerLink="/user">Mi cuenta</button>
       </div>
     </header>
   </div>
+</div>

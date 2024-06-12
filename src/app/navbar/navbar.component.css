@@ -1,6 +1,4 @@
-*, ::after, ::before{
-  box-sizing: content-box;
-}
+
 .form-control-dark {
     border-color: var(--bs-gray);
   }
@@ -16,17 +14,15 @@
   .dropdown-toggle:not(:focus) {
     outline: 0;
   }
-  
-  .container{
-    width:100%;
-  }
 
-  .logo{
+  #logo{
     margin-left: 10%;
+    height: 8em !important;
+    width: auto;
   }
 
   header{
-    padding:0 15em;
+    padding:0 6em;
   }
 
   .nav-link{
@@ -36,3 +32,8 @@
   .nav-link:hover{
     color:#E5B80B;
   }
+
+.container-fluid{
+    padding: 2em !important;
+  }
+

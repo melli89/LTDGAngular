@@ -1,0 +1,45 @@
+<div id="container">
+
+    <div id="filtro">
+      <div class="button-add">
+        <button id="botonFiltro" mat-flat-button color="primary" (click)="openUserPanel()"><mat-icon>add</mat-icon></button>
+      </div>
+
+      <mat-form-field  id="buscador">
+        <mat-label>Buscar usuario</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Introduzca algo para buscar" #input>
+      </mat-form-field>
+    </div>
+ 
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+   
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+          <td mat-cell *matCellDef="let row"  class="celda-nombre"> {{row.email}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="celda-acciones"> Acciones </th>
+          <td mat-cell *matCellDef="let row" class="celda-acciones">
+              <button mat-icon-button color="primary" (click)="openUserPanel(row)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="confirmation(row.id, row.nombre)">
+                <mat-icon>delete</mat-icon>
+              </button>
+          </td>
+        </ng-container>
+   
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+   
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No hay datos que mostrar "{{input.value}}"</td>
+        </tr>
+      </table>
+   
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Selecciona una página"></mat-paginator>
+    </div>
+</div>
+   

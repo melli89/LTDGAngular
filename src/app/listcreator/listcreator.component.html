@@ -1,10 +1,11 @@
-
-<div>
-  <h3 id="puntos"></h3>
+<div id="containerTitle">
+  <h1>CREADOR DE LISTAS</h1>
 </div>
+
 <div class="container-fluid">
   <div class="row">
     <div class="contenedor col-4">
+     
       <h2>UNIDADES</h2>
       <div class="title" (click)="display(0)">Héroes</div>
       <div class="unit">
@@ -47,7 +48,7 @@
         </div>
       </div>
 
-      <button (click)="guardarLista()" id="btn-save">Guardar lista</button>
+      
 
     </div>
   
@@ -59,7 +60,7 @@
         <button mat-icon-button color="primary" (click)="add(item.model)">
           <mat-icon>add</mat-icon>
         </button>
-        <button mat-icon-button color="primary" (click)="editUnit(item)">
+        <button id="edicion" mat-icon-button color="primary" (click)="editUnit(item)">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button color="warn" (click)="delete(item.id)">
@@ -71,9 +72,9 @@
     
     <div  class="contenedor col-4" id="options" >
       <h2>OPCIONES</h2>
-      <div *ngIf="unit">
+      <div id="opciones" *ngIf="unit">
         <label for="unitSize"><h4>Tamaño unidad: </h4></label>
-        <input id="unitSize" type="number" min="{{unit.model.tamano_minimo}}" max="{{unit.model.tamano_maximo}}" value="{{unit.model.tamano_minimo}}" (change)="setSize($event)"/>
+        <input id="unitSize" type="number" min="{{unit.model.tamano_minimo}}" max="{{unit.model.tamano_maximo}}" value="{{unit.minisAmount}}" (change)="setSize($event)"/>
 
         <div *ngIf="isChampion()">
           <section class="example-section">
@@ -92,7 +93,10 @@
         </div>
       </div>
     </div>
-    
+
+    <div id="botonContainer">
+      <button (click)="guardarLista()" id="btn-save">Guardar lista</button>
+    </div>
     
   </div>
 </div>

@@ -16,5 +16,7 @@ export class ArmyService {
     return this._http.get<ArmyModel[]>(`${this.URL_API}/armies`)
   }
 
-  
+  getArmy(id: number): Observable<ArmyModel> {
+    return this._http.get<ArmyModel>(`${this.URL_API}/armies/${id}`)
+  }
 }

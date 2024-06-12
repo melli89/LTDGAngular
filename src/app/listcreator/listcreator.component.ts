@@ -6,6 +6,10 @@ import { ChampionService } from '../services/champion.service';
 import { ChampionModel } from '../models/champion.model';
 import { UpgradeService } from '../services/upgrade.service';
 import { UpgradeModel } from '../models/upgrade.model';
+import { ListModel } from '../models/list.model';
+import { CookieService } from 'ngx-cookie-service';
+import { ListService } from '../services/list.service';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-listcreator',
@@ -14,46 +18,42 @@ import { UpgradeModel } from '../models/upgrade.model';
 })
 export class ListcreatorComponent{
 
-
   cgItems: Array<UnitModel> = new Array<UnitModel>;
   basicItems: Array<UnitModel> = new Array<UnitModel>;
   specialItems: Array<UnitModel> = new Array<UnitModel>;
   singularItems: Array<UnitModel> = new Array<UnitModel>;
   
-  
   contadorId: number = 1; //para dar id unico a los elementos de basket
-  unit: {id: number, model:UnitModel, champion: ChampionModel|null, minisAmount: number, totalPoints: number,upgrades:UpgradeModel|null} | null = null;
+  unit: {id: number, model:UnitModel, champion: ChampionModel|null, minisAmount: number, totalPoints: number,upgrade:UpgradeModel|null} | null = null;
   champion: ChampionModel | null = null;
   upgrades: UpgradeModel[] = [];
-  ejercito_id = null;
+  ejercito_id: string | null = null;
   handWeapon: UpgradeModel |null = null;
   totalPoints: number = 0;
-
 
   //CON MODEL SERIA: basket: Array<{model: UnitModel}>
   //cuando se le quieran añadir objetos especiales y reglas tienen que añadirse como atributos del objeto
   // ej: basket: Array<{model: UnitModel, reglas: Array<ReglasModel>}>
-  basket: Array<{id: number, model: UnitModel,champion: ChampionModel|null, minisAmount:number, totalPoints: number,upgrades:UpgradeModel|null}> = [];
+  basket: Array<{id: number, model: UnitModel,champion: ChampionModel|null, minisAmount:number, totalPoints: number,upgrade:UpgradeModel|null}> = [];
 
   constructor(
     private _unitService:UnitService,
     private _route: ActivatedRoute,
     private _championService:ChampionService,
-    private _upgradeService:UpgradeService
+    private _upgradeService:UpgradeService,
+    private _cookieService: CookieService,
+    private _listService: ListService,
+    private _sharedService: SharedService
   ){
     let ejercito_id = this._route.snapshot.paramMap.get("id");
 
-    ejercito_id = ejercito_id ? ejercito_id : '1';
+    this.ejercito_id = ejercito_id ? ejercito_id : '1';
 
-    
-    this.getCG(ejercito_id);
-    this.getBasics(ejercito_id);
-    this.getSpecials(ejercito_id);
-    this.getSingulars(ejercito_id);
-    
+    this.getCG(this.ejercito_id);
+    this.getBasics(this.ejercito_id);
+    this.getSpecials(this.ejercito_id);
+    this.getSingulars(this.ejercito_id);
   }
-
-  
 
   getCG (ejercito_id: string) {
     const subscription = this._unitService.getCG(ejercito_id).subscribe({
@@ -112,7 +112,7 @@ export class ListcreatorComponent{
       },
       complete:() =>{
         //si no se existe en la lista se añade el item y se le da la cantidad 1
-        this.basket.push({id: this.contadorId, model: item, champion: null, minisAmount: item.tamano_minimo, totalPoints: item.tamano_minimo*item.punto_mini,upgrades:this.handWeapon});
+        this.basket.push({id: this.contadorId, model: item, champion: null, minisAmount: item.tamano_minimo, totalPoints: item.tamano_minimo*item.punto_mini,upgrade:this.handWeapon});
 
         this.contadorId++;
         this.calcularTotal();
@@ -123,7 +123,6 @@ export class ListcreatorComponent{
     
   }
 
-  
   //borra una unidad de la lista
   delete(id: number): void {
     this.basket = this.basket.filter(model => model.id !== id);
@@ -146,14 +145,43 @@ export class ListcreatorComponent{
   }
 
   guardarLista() {
-    //CONEXION CON LA BASE DE DATOS PARA QUE SE GUARDE LA INFORMACION EN LA LISTA DE USUARIO
+    let token: string = this._cookieService.get('token'); 
+
+    if (!token) {
+      console.log("No hay token")
+      return;
+    }
+
+    let tokenPayload = JSON.parse(atob(token.split('.')[1]));
+    let user = tokenPayload.id;
+
+    let lista = new ListModel(
+      null,
+      (new Date()).toISOString(),
+      this.totalPoints,
+      parseInt(user),
+      parseInt(this.ejercito_id!),
+      this.basket
+    )
+    
+    const subscription = this._listService.addList(lista).subscribe({
+      next: () => {
+        this._sharedService.openSnackBar("Lista guardada")
+      }, complete: () => {
+        subscription.unsubscribe();
+      }, error: console.log
+    })
+
   }
 
-  editUnit(item: {id:number, model: UnitModel, champion: ChampionModel|null, minisAmount: number,totalPoints:number,upgrades:UpgradeModel|null}){
+  editUnit(item: {id:number, model: UnitModel, champion: ChampionModel|null, minisAmount: number,totalPoints:number,upgrade:UpgradeModel|null}){
     
+
     this.unit = item;
+    let size = (document.getElementById("unitSize") as HTMLInputElement).value = item.minisAmount.toString();
     this.getchampion(this.unit.model.id);
     this.getUpgrades(this.unit.model.id);
+    
   }
 
   getUpgrades(id_unidad: number){
@@ -215,7 +243,7 @@ export class ListcreatorComponent{
         let idInput = input.value;
         this.upgrades.forEach( positionList => {
             if (positionList.id == parseInt(idInput)){
-              this.unit!.upgrades = positionList;
+              this.unit!.upgrade = positionList;
             }
         });
       }
@@ -237,8 +265,8 @@ export class ListcreatorComponent{
   }
   
 
-  if(this.unit!.upgrades != null){
-    ptosMejora = this.unit!.upgrades.puntos;
+  if(this.unit!.upgrade != null){
+    ptosMejora = this.unit!.upgrade.puntos;
     totalPuntos += (ptosMejora*tamanoUnidad);
   }
 
@@ -252,4 +280,5 @@ export class ListcreatorComponent{
       this.totalPoints += unit.totalPoints;
   });
  }
+
 }

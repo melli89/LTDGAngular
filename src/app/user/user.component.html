@@ -1,0 +1,22 @@
+<div id="titulo">
+    <h1>INFORMACIÓN DEL USUARIO</h1>
+</div>
+
+<div id = "container">
+    <h3>INFORMACIÓN</h3>
+    <div class="fila">
+        <p><b>Usuario:</b> {{user!.email}}</p>
+        <button class="btn btn" (click)="openUserPanel(user!)"><mat-icon class="icono">edit</mat-icon></button>
+    </div>
+
+    <h3>LISTAS</h3>
+    
+        
+        <div class="fila" *ngFor="let lista of listas">
+            <p>{{lista.nombre_lista}}</p>
+            <button (click)="pdf(lista)"><mat-icon class="icono">download</mat-icon></button>
+        </div>
+
+
+    <button class="btn btn-primary" (click)="logOut()">Cerrar sesión</button>
+</div>

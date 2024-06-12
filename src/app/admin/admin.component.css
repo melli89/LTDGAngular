@@ -1,0 +1,19 @@
+#container{
+    margin: 5% 20%;
+}
+
+#filtro{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+#botonFiltro{
+    padding:2em;
+}
+
+#buscador{
+    width: 90%;
+    margin-left: 20px;
+}
+
